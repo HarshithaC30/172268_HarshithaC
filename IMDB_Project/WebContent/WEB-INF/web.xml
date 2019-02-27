@@ -3,6 +3,5 @@
   <display-name>IMDB_Project</display-name>
   <welcome-file-list>
     <welcome-file>HomePage.html</welcome-file>
-    
   </welcome-file-list>
 </web-app>
