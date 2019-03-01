@@ -59,9 +59,7 @@ public class Registration extends HttpServlet {
 		  
 		  if(status==true) {
 		 response.sendRedirect("Login.html"); }
-		  else {
-		  out.println("you are out");
-	}}
+		 }
 	
 
 }

@@ -1,10 +1,7 @@
-package com.login.imdb;
+package com.comments.imdb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -13,20 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.imdb.DaoClass;
-import com.proj.imdb.ConnectionFactory;
-
 /**
- * Servlet implementation class Login
+ * Servlet implementation class CommentsDB
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/CommentsDB")
+public class CommentsDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public CommentsDB() {
         super();
     }
 
@@ -34,41 +28,21 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		 String Name=request.getParameter("name");
-		 String Password=request.getParameter("pwd");
-		 System.out.println(Name+" UI  "+Password);
-		 DaoClass dao = new DaoClass();
-		 
-		 boolean status = false;
-		 try {
-			 
-			status=dao.validate(Name,Password);
-			System.out.println(status);
+		//PrintWriter out=response.getWriter();
+		//out.println("tjoiru");
+		try {
+			new CommentsDao().insert(new Comments(request.getParameter("name"),request.getParameter("usercomments")));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		 
-		// PrintWriter out = response.getWriter();
-		 if(status==true)
-		 {
-			 response.sendRedirect("Comments.html");
-		 }
-		 else
-		 {
-			 response.sendRedirect("Reg.html");
-		 }
-
 		
-	
 	}
 
 }
